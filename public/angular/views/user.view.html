@@ -1,0 +1,29 @@
+﻿<h2> Mon compte </h2>
+<br/>
+
+<p>Nom : {{user_data.name}}</p>
+<p>Adresse mail : {{user_data.email}}</p>
+<p>Score : {{user_data.score}}</p>
+
+<h2> Mes taches en cours </h2>
+<br/>
+<ul class="surveys list">
+  <li class="survey-item" ng-repeat="task in task_list">
+    
+    <span class="survey-country list-only">
+      <span class="label label-warning">{{task.type}}</span>
+    </span>
+    
+    <span class="survey-name">
+      <b>{{task.title}}</b>  par {{task.author}}
+    </span>
+    
+    <div class="float-right">
+      <span class="survey-stage">
+        <a class="btn btn-success btn-sm" href="#/tasks/{{task.id}}">Voir le détail</a>
+      </span>
+    </div>
+    
+  </li>
+  
+</ul>

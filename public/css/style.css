@@ -1,0 +1,160 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+/* entypo */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: white;
+  background: #013A55;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  font-family: 'Lato', sans-serif;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.004);
+  font-weight: 400;
+}
+
+.banner{
+  width: 100%;
+  background-image: url("/public/images/bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 200px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a, .navbar li a:active, .navbar li a:focus{
+  color: white;
+  border-bottom: 2px solid transparent;
+  transition : border-color 250ms ease;
+}
+
+.navbar li a:hover{
+  background-color: transparent;
+  border-color:#719E40;
+  transition : border-color 250ms ease;
+}
+.title {
+    color: #719e40;
+    letter-spacing: -3px;
+    font-family: 'Lato', sans-serif;
+    font-size: 100px;
+    font-weight: 200;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.surveys {
+  color: #333;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.survey-item {
+  display: block;
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 2px;
+  background: white;
+  box-shadow: 0 2px 1px rgba(170, 170, 170, 0.25);
+}
+
+.survey-name {
+  font-weight: 400;
+}
+
+.list .survey-item {
+  position: relative;
+  padding: 0;
+  font-size: 14px;
+  line-height: 60px;
+}
+.list .survey-item .float-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+@media screen and (max-width: 800px) {
+  .list .survey-item .stage:not(.active) {
+    display: none;
+  }
+}
+@media screen and (max-width: 700px) {
+  .list .survey-item .survey-progress-bg {
+    display: none;
+  }
+}
+@media screen and (max-width: 600px) {
+  .list .survey-item .float-right {
+    position: static;
+    line-height: 20px;
+    padding-bottom: 10px;
+  }
+}
+.list .survey-country,
+.list .survey-progress,
+.list .survey-completes,
+.list .survey-end-date {
+  color: #A1A1A4;
+}
+.list .survey-country,
+.list .survey-completes,
+.list .survey-end-date,
+.list .survey-name,
+.list .survey-stage {
+  margin: 0 10px;
+}
+.list .survey-country {
+  margin-right: 0;
+}
+.list .survey-end-date,
+.list .survey-completes,
+.list .survey-country,
+.list .survey-name {
+  vertical-align: middle;
+}
+.list .survey-end-date {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.list .list-only {
+  display: auto;
+}
+  
+
+.survey-progress-label {
+  vertical-align: middle;
+  margin: 0 10px;
+  color: #8DC63F;
+}
+
+.survey-progress-bg {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  width: 100px;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #eee;
+}
+
+.survey-progress-fg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  background: #8DC63F;
+}

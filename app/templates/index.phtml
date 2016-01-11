@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="CrowdApp">
+  <head>
+    <meta charset="utf-8"/>
+    
+    <meta name="google-signin-client_id" content="86244944622-vp3303etq8vr8l9oe60argk1lrf3u8tk.apps.googleusercontent.com">
+
+    <title>CrowHelp</title>
+    <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/style.css">
+  </head>
+  <body id="CrowdApp" >
+    <nav class="navbar navbar-fixed-top" role="navigation">
+      <a class="navbar-brand" href="#/">Crowd-Help</a>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#/tasks">Liste de tâches</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+        <li class="active" ng-if="!connected">
+          <a href="#/login">Connexion</a>
+        </li>
+        <li class="active" ng-if="connected">
+          <a href="#/user">{{globals.currentUser.username}}</a>
+        </li>
+        <li class="active" ng-if="connected">
+          <a href="#/logout">Déconnexion</a>
+        </li>
+      </ul>
+    </nav>
+
+    <h1 class="title">Crowd-Help</h1>
+
+    <div class="container">
+      <div class="">
+        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+        <div ng-view></div>
+      </div>
+    </div>
+
+    <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="//code.angularjs.org/1.4.8/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.4.8/angular-route.min.js"></script>
+    <script src="//code.angularjs.org/1.4.8/angular-cookies.min.js"></script>
+
+    <script src="/public/angular/app.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script src="/public/angular/controllers/home.controller.js"></script>
+    <script src="/public/angular/controllers/login.controller.js"></script>
+    <script src="/public/angular/controllers/tasks.controller.js"></script>
+    <script src="/public/angular/controllers/user.controller.js"></script>
+
+    <script src="/public/angular/services/authentication.service.js"></script>
+    <script src="/public/angular/services/flash.service.js"></script>
+    <script src="/public/angular/services/user.service.js"></script>
+    <script src="/public/angular/services/tasks.service.js"></script>
+
+  </body>
+</html>
