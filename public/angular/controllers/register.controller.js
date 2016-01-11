@@ -2,25 +2,25 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('CrowdApp')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
-    function RegisterController(UserService, $location, $rootScope, FlashService) {
-        var vm = this;
+    RegisterController.$inject = ['$scope','UserService', '$location', '$rootScope', 'FlashService'];
+    function RegisterController($scope, UserService, $location, $rootScope, FlashService) {
+        $scope.register = register;
 
-        vm.register = register;
+        $scope.user = {};
 
         function register() {
-            vm.dataLoading = true;
-            UserService.Create(vm.user)
+            $scope.dataLoading = true;
+            UserService.Create($scope.user)
                 .then(function (response) {
                     if (response.success) {
                         FlashService.Success('Registration successful', true);
                         $location.path('/login');
                     } else {
                         FlashService.Error(response.message);
-                        vm.dataLoading = false;
+                        $scope.dataLoading = false;
                     }
                 });
         }

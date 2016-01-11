@@ -64,7 +64,7 @@ function run($rootScope, $location, $cookieStore, $http, AuthenticationService) 
         //déconnexion de l'utilisateur
         if($location.path() == '/logout'){
             AuthenticationService.ClearCredentials();
-            $location.path('/');
+            document.location = '/';
         }else{
 
             // redirect to login page if not logged in and trying to access a restricted page

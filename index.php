@@ -2,17 +2,10 @@
 
 define('APP', __DIR__ . '/app');
 
-require APP . '/vendor/autoload.php';
+//load config
+require APP . '/src/bootstrap.php';
 
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
-
-require APP . '/src/DB.php';
-require APP . '/src/controller/task.ctrl.php';
-
-// Instantiate the app
-$settings = require APP . '/src/settings.php';
-
+//init app
 $app = new \Slim\App($settings);
 
 // Set up dependencies

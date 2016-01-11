@@ -27,17 +27,13 @@
 
         }
 
-        function SetCredentials(username, password) {
-            var authdata = Base64.encode(username + ':' + password);
+        function SetCredentials(user) {
 
             $rootScope.globals = {
-                currentUser: {
-                    username: username,
-                    authdata: authdata
-                }
+                currentUser: user
             };
 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = 'Bearer ' + user.token; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
         }
 

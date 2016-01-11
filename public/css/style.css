@@ -9,7 +9,14 @@
   box-sizing: border-box;
 }
 
-body {
+
+body[ng-cloak] {
+  opacity: 0;
+  transition : opacity 5s ease;
+}
+
+body{
+  opacity: 1;
   color: white;
   background: #013A55;
   max-width: 1200px;

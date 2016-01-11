@@ -16,9 +16,11 @@ LoginController.$inject = ['$scope','$location', 'AuthenticationService', 'Flash
             AuthenticationService.Login($scope.username, $scope.password, function (response) {
 
                 if (response.success) {
-                    AuthenticationService.SetCredentials($scope.username, $scope.password);
+
+                    AuthenticationService.SetCredentials(response.user);
                     
-                    document.location = '/';
+                    //document.location = '/';
+
                 } else {
                     FlashService.Error(response.message);
                     $scope.dataLoading = false;

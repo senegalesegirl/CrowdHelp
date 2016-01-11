@@ -8,9 +8,11 @@
     <title>CrowHelp</title>
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="public/css/style.css">
   </head>
-  <body id="CrowdApp" >
+  <body id="CrowdApp" ng-cloak>
+    
     <nav class="navbar navbar-fixed-top" role="navigation">
       <a class="navbar-brand" href="#/">Crowd-Help</a>
       <ul class="nav navbar-nav">
@@ -23,7 +25,7 @@
           <a href="#/login">Connexion</a>
         </li>
         <li class="active" ng-if="connected">
-          <a href="#/user">{{globals.currentUser.username}}</a>
+          <a href="#/user">{{globals.currentUser.first_name}} {{globals.currentUser.last_name}} [ {{globals.currentUser.score}} <i class="fa fa-star"></i> ] </a>
         </li>
         <li class="active" ng-if="connected">
           <a href="#/logout">Déconnexion</a>
@@ -51,6 +53,7 @@
     <script src="/public/angular/controllers/login.controller.js"></script>
     <script src="/public/angular/controllers/tasks.controller.js"></script>
     <script src="/public/angular/controllers/user.controller.js"></script>
+    <script src="/public/angular/controllers/register.controller.js"></script>
 
     <script src="/public/angular/services/authentication.service.js"></script>
     <script src="/public/angular/services/flash.service.js"></script>

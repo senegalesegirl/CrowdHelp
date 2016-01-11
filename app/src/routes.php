@@ -1,7 +1,6 @@
 <?php
 // Routes
 
-define('PASSORD_SECRET_HASH', mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 define('MAX_TASK_PER_USER', 2);
 
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,65 +10,41 @@ use Psr\Http\Message\ResponseInterface;
 $app->group('/api', function () {
 
 	//USER//
+    
+	//create user
+	$this->post('/user', 'User:Create');
+
     $this->post('/user/authenticate', function (ServerRequestInterface $request, ResponseInterface $response, $args) {
 
 		$db = DB::getInstance();
 
-		$data = array( 'success' => false);
+		$result = array( 'success' => false, 'message' => 'Couple email/mot de passe invalide');
 
 		//GET POST DATA
 		$request_data = json_decode($request->getBody()->getContents());
 
-		$list = $db->user("email = ?", $request_data->username)->fetch();
+		$user = $db->user("email = ?", $request_data->username)->fetch();
 
-		if( $list ){
-			if(password_verify($request_data->password, $list['password'])){
-				unset($list['password']);
-				$data['success'] = true;
-				$data['user'] = $list;
+		if( $user ){
+			if(password_verify($request_data->password, $user['password'])){
+
+				//dont send password
+				unset($user['password']);
+					
+				//create & save token
+				$user['token'] = Secure::GenerateToken();
+				$user->update();
+				
+				$result = array ('success' => true, 'user' => $user);
 			}
 		}
 
-		echo json_encode($data);
+		echo json_encode($result);
 	    return $response->withHeader('Content-type', 'application/json');
 
     });
 
-    $this->get('/user/{id}', function ($request, $response, $args) {
-
-		$db = DB::getInstance();
-
-		$data = array( 'success' => false);
-
-		$user = $db->user("id = ?", $args['id'])->fetch();
-
-		if($user){
-			$data['success'] = true;
-
-			$data['user_data'] = array(
-				'id' => $user['id'],
-				'name' => $user['name'],
-				'email' => $user['email'],
-				'score' => $user['score']
-				);
-
-			// get current tasks
-			$tasks = $db->user_task();
-			
-			$data['task_list'] = array();
-
-			foreach ($tasks as $t) {
-			    $data['task_list'][] = $t->task;
-			}
-
-		}else{
-			$data['message'] = "User not valid";
-		}
-
-		echo json_encode($data);
-	    return $response->withHeader('Content-type', 'application/json');
-
-    });
+    $this->get('/user/{id}', 'User:Find');
 
     //TASKS//
 
