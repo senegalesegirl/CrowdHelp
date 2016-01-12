@@ -9,7 +9,7 @@
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/assets/css/style.css">
   </head>
   <body id="CrowdApp" ng-cloak>
     
@@ -25,7 +25,7 @@
           <a href="#/login">Connexion</a>
         </li>
         <li class="active" ng-if="connected">
-          <a href="#/user">{{globals.currentUser.first_name}} {{globals.currentUser.last_name}} [ {{globals.currentUser.score}} <i class="fa fa-star"></i> ] </a>
+          <a href="#/user">{{globals.currentUser.name}} [ {{globals.currentUser.score}} <i class="fa fa-star"></i> ] </a>
         </li>
         <li class="active" ng-if="connected">
           <a href="#/logout">Déconnexion</a>
@@ -37,7 +37,7 @@
 
     <div class="container">
       <div class="">
-        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+        <div class="flash-message" ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-bind="flash.message"></div>
         <div ng-view></div>
       </div>
     </div>
@@ -47,18 +47,18 @@
     <script src="//code.angularjs.org/1.4.8/angular-route.min.js"></script>
     <script src="//code.angularjs.org/1.4.8/angular-cookies.min.js"></script>
 
-    <script src="/public/angular/app.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/app/app.js"></script>
     
-    <script src="/public/angular/controllers/home.controller.js"></script>
-    <script src="/public/angular/controllers/login.controller.js"></script>
-    <script src="/public/angular/controllers/tasks.controller.js"></script>
-    <script src="/public/angular/controllers/user.controller.js"></script>
-    <script src="/public/angular/controllers/register.controller.js"></script>
+    <script src="/public/app/controllers/home.controller.js"></script>
+    <script src="/public/app/controllers/login.controller.js"></script>
+    <script src="/public/app/controllers/tasks.controller.js"></script>
+    <script src="/public/app/controllers/user.controller.js"></script>
+    <script src="/public/app/controllers/register.controller.js"></script>
 
-    <script src="/public/angular/services/authentication.service.js"></script>
-    <script src="/public/angular/services/flash.service.js"></script>
-    <script src="/public/angular/services/user.service.js"></script>
-    <script src="/public/angular/services/tasks.service.js"></script>
+    <script src="/public/app/services/authentication.service.js"></script>
+    <script src="/public/app/services/flash.service.js"></script>
+    <script src="/public/app/services/user.service.js"></script>
+    <script src="/public/app/services/tasks.service.js"></script>
 
   </body>
 </html>

@@ -40,7 +40,40 @@ class User {
 
 	}
 
-	public function Find ($request, $response, $args){
+	public function Auth($request, $response, $args){
+
+		$db = DB::getInstance();
+
+		$result = array( 'success' => false, 'message' => 'Couple email/mot de passe invalide');
+
+		//GET POST DATA
+		$request_data = json_decode($request->getBody()->getContents());
+
+		$user = $db->user("email = ?", $request_data->username)->fetch();
+
+		if( $user ){
+			if(password_verify($request_data->password, $user['password'])){
+
+				$token = Auth::GenerateToken( array( "user" => $user['id'] ) );
+				
+				$result = array (
+					'success' => true, 
+					'user' => array( 
+						'name' => $user['first_name'] . ' ' . $user['last_name'],
+						'score' => $user['score'],
+						'email' => $user['email'],
+						'token' => $token
+					)
+				);
+			}
+		}
+
+		echo json_encode($result);
+	    return $response->withHeader('Content-type', 'application/json');
+
+    }
+
+	public function Find($request, $response, $args){
 
 		$db = DB::getInstance();
 
@@ -78,42 +111,5 @@ class User {
 }
 
 
-
-class Helpers {
-
-	//encrypt a password
-	public static function EncrytPassword($pw){
-		
-		$options = [
-		    'cost' => 12,
-		    'salt' => PASSORD_SECRET_HASH,
-		];
-
-		return password_hash($pw, PASSWORD_BCRYPT, $options);
-	}
-
-	//check a password matches the hash
-	public static function CheckPassword($pw, $hash){
-		return password_verify($pw, $hash);
-	}
-
-	//clean data, remove spaces, special chars
-	public static function sanitize($data) {
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	}
-
-	// validate URL
-	public static function validate_url($url){
-		return filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_HOST_REQUIRED);
-	}
-	 
-	// validate email address
-	public static function validate_email($email){
-		return filter_var($email, FILTER_VALIDATE_EMAIL);
- 	}
-}
 
 ?>

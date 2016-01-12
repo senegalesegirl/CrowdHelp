@@ -165,3 +165,10 @@ body{
   margin: 0;
   background: #8DC63F;
 }
+
+
+.flash-message {
+  position: absolute;
+  left: 1em;
+  top:5em;
+}

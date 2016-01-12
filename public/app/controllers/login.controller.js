@@ -17,9 +17,12 @@ LoginController.$inject = ['$scope','$location', 'AuthenticationService', 'Flash
 
                 if (response.success) {
 
+                    console.log(response);
+
                     AuthenticationService.SetCredentials(response.user);
                     
-                    //document.location = '/';
+                    //redirection
+                    document.location = '/';
 
                 } else {
                     FlashService.Error(response.message);

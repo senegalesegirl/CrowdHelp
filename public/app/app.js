@@ -8,7 +8,7 @@ CrowdApp
 config.$inject = ['$routeProvider', '$locationProvider'];
 function config($routeProvider, $locationProvider) {
 
-    var views = '/public/angular/views';
+    var views = '/public/app/views';
 
     $routeProvider
         .when('/', {
@@ -53,27 +53,37 @@ function run($rootScope, $location, $cookieStore, $http, AuthenticationService) 
     $rootScope.connected = false;
 
     if ($rootScope.globals.currentUser) {
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.globals.currentUser.token; // jshint ignore:line
+        
         $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
         $rootScope.connected = true;
 
     }
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
 
-        //déconnexion de l'utilisateur
-        if($location.path() == '/logout'){
-            AuthenticationService.ClearCredentials();
-            document.location = '/';
-        }else{
 
-            // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/', '/login', '/register']) === -1;
-            var loggedIn = $rootScope.globals.currentUser;
+        var loggedIn = $rootScope.globals.currentUser;
 
-            if (restrictedPage && !loggedIn) {
-                $location.path('/login');
-            }
+        switch($location.path()) {
+            case '/logout':
+                AuthenticationService.ClearCredentials();
+                document.location = '/';
+                break;
+            case '/login':
+                if(loggedIn)
+                    document.location = '/';
+            default :
+                // redirect to login page if not logged in and trying to access a restricted page
+                var restrictedPage = $.inArray($location.path(), ['/', '/login', '/register']) === -1;
+                var loggedIn = $rootScope.globals.currentUser;
+
+                if (restrictedPage && !loggedIn) {
+                    $location.path('/login');
+                }
+                break;
         }
 
     });
