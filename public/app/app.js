@@ -8,7 +8,7 @@ CrowdApp
 config.$inject = ['$routeProvider', '$locationProvider'];
 function config($routeProvider, $locationProvider) {
 
-    var views = '/public/app/views';
+    var views = 'public/app/views';
 
     $routeProvider
         .when('/', {

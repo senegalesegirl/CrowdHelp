@@ -11,17 +11,21 @@
 
         service.GetCurrentUser  = _GetCurrentUser;
         service.GetUserInfo  = _GetUserInfo;
+        service.Create = Create;
 
         return service;
 
         function _GetUserInfo(id, callback, handleerror) {
-            return $http.get('/api/user/' + id).then(callback, handleError);
+            return $http.get('api/user/' + id).then(callback, handleError);
         }
 
         function _GetCurrentUser() {
             return 1;//return $http.delete('/api/user/' + id).then(handleSuccess, handleError('Error deleting user'));
         }
 
+        function Create(user) {
+           return $http.post('api/user', user).then(handleSuccess, handleError('Error creating user'));
+        }
         // private functions
 
         function handleSuccess(res) {
