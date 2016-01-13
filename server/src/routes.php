@@ -14,7 +14,7 @@ require 'classes/helpers.php';
 require 'classes/auth.php';
 
 
-$app->group('/api', function () use ( $RequireAuth ) {
+$app->group(SERVER_URL.'/api', function () use ( $RequireAuth ) {
 
 	//USER//
 

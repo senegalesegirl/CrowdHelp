@@ -2,6 +2,11 @@
 
 define('APP', __DIR__ );
 
+
+define('SERVER_URL', $_SERVER['HTTP_HOST'].'/CrowdHelp/CrowdHelp' );
+
+echo SERVER_URL;
+
 //load config
 require APP . '/src/bootstrap.php';
 
